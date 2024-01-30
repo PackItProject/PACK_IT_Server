@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="54.180.70.155" id="3bfe460a-3ee5-4fcf-98f2-19cdee4b7246" keyPath="C:\Users\gayea\OneDrive\바탕 화면\aws key 모음\PackItKeyPair.pem" port="22" customName="PACKIT" nameFormat="CUSTOM" username="ubuntu" useOpenSSHConfig="true">
+        <option name="customName" value="PACKIT" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>

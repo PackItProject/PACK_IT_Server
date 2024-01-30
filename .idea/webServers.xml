@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="721c511c-0311-4efe-8576-f8bc87270cf2" name="PACKIT">
+        <fileTransfer accessType="SFTP" host="54.180.70.155" port="22" sshConfigId="3bfe460a-3ee5-4fcf-98f2-19cdee4b7246" sshConfig="PACKIT" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
