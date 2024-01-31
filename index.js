@@ -20,7 +20,7 @@ app.use(myLogger);
 
 app.get('/', (req, res) => {
     console.log("/");
-    res.send('PackIt 루트페이지!');
+    res.send('PackIt 루트페이지!!!!!!');
 });
 
 app.get('/hello', (req, res) => {
