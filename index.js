@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
 app.get('/hello', (req, res) => {
     console.log("/hello");
-    res.send('Hello world!');
+    res.send('패킷 랜딩 페이지');
 });
 
 app.use('/temp', tempRouter);
