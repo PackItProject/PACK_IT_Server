@@ -1,0 +1,28 @@
+paths:
+  /cart:
+    post:
+      tags:
+        - Cart
+      summary: 장바구니에 메뉴 담기
+      operationId: addCartItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Cart not found
+
+
+
