@@ -3,26 +3,70 @@ paths:
     post:
       tags:
         - Cart
-      summary: 장바구니에 메뉴 담기
-      operationId: addCartItem
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-
-
+      summary: 장바구니에 메뉴 추가
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: item
+          description: 추가할 메뉴 정보
+          schema:
+            type: object
+            required:
+              - userId
+              - storeId
+              - menuId
+              - quantity
+            properties:
+              userId:
+                type: integer
+              storeId:
+                type: integer
+              menuId:
+                type: integer
+              quantity:
+                type: integer
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-
-        '400':
-          description: Invalid ID supplied
-        '404':
-          description: Cart not found
-
-
+        200:
+          description: 장바구니에 아이템이 성공적으로 추가되었습니다.
+        500:
+          description: 장바구니에 아이템을 추가하는데 실패하였습니다.
+    get:
+      tags:
+        - Cart
+      summary: 장바구니 조회
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: pk_user
+          type: integer
+        - in: query
+          name: store_id
+          type: integer
+      responses:
+        200:
+          description: 장바구니 조회에 성공하였습니다.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CartItem'
+        500:
+          description: 장바구니 조회에 실패하였습니다.
+definitions:
+  CartItem:
+    type: object
+    properties:
+      store_id:
+        type: integer
+      pk_user:
+        type: integer
+      menu_id:
+        type: integer
+      quantity:
+        type: integer
+      menu_name:
+        type: string
+      price:
+        type: integer
 
