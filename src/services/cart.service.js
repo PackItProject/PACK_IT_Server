@@ -4,13 +4,43 @@ import { pool } from '../../config/db.config.js';
 //import Cart from '../models/cart.dto.js'
 import { CartDTO } from '../models/cart.dto.js';
 
-export const addItem = async (userId, storeId, menuId,quantity) => {
-    const query = `INSERT INTO cart (pk_user, store_id, menu_id,quantity) VALUES (?, ?, ?,?)`;
-    const params = [userId, storeId, menuId,quantity];
-    const [rows, fields] = await pool.execute(query, params);  // 실제로 데이터베이스에 쿼리를 실행합니다.
+export const addItem = async (userId, storeId, menuId, quantity) => {
+    // 먼저 해당 항목이 이미 있는지 확인합니다.
+    const checkQuery = `SELECT * FROM cart WHERE pk_user = ? AND store_id = ? AND menu_id = ?`;
+    const checkParams = [userId, storeId, menuId];
+    const [checkRows, fields] = await pool.execute(checkQuery, checkParams);
+
+    if (checkRows.length > 0) {  // 이미 해당 항목이 있다면,
+        // 수량을 업데이트합니다.
+        const updateQuery = `UPDATE cart SET quantity = quantity + ? WHERE pk_user = ? AND store_id = ? AND menu_id = ?`;
+        const updateParams = [quantity, userId, storeId, menuId];
+        const [updateRows, fields] = await pool.execute(updateQuery, updateParams);
+
+        return updateRows;
+    } else {  // 해당 항목이 없다면,
+        // 새 항목을 추가합니다.
+        const insertQuery = `INSERT INTO cart (pk_user, store_id, menu_id, quantity) VALUES (?, ?, ?, ?)`;
+        const insertParams = [userId, storeId, menuId, quantity];
+        const [insertRows, fields] = await pool.execute(insertQuery, insertParams);
+
+        return insertRows;
+    }
+};
+
+
+export const getCartItems = async (pk_user, store_id) => {
+    const query = `
+        SELECT cart.*, menu.menu_name, menu.price
+        FROM cart 
+        INNER JOIN menu ON cart.menu_id = menu.id
+        WHERE cart.pk_user = ? AND cart.store_id = ?`;
+    const params = [pk_user, store_id];
+    const [rows, fields] = await pool.execute(query, params);
 
     return rows;
 };
+
+
 
 
 
