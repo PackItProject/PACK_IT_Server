@@ -65,8 +65,16 @@ definitions:
         type: integer
       quantity:
         type: integer
+      name:
+        type: string
+      phone_number:
+        type: string
       menu_name:
         type: string
       price:
         type: integer
+      store_name:
+        type: string
+      address:
+        type: string
 
