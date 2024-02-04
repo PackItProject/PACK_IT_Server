@@ -9,7 +9,7 @@ const options = {
             version: '1.0.0',
             description: 'Packit API 입니다'
         },
-        host: 'localhost:3000',
+        host: 'http://localhost:3000',
         basepath: '../'
     },
     apis: ['./src/routes/*.js', './swagger/*']
