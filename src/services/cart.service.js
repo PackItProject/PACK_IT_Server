@@ -30,9 +30,11 @@ export const addItem = async (userId, storeId, menuId, quantity) => {
 
 export const getCartItems = async (pk_user, store_id) => {
     const query = `
-        SELECT cart.*, menu.menu_name, menu.price
-        FROM cart 
+        SELECT cart.*, User.name,User.phone_number,menu.menu_name, menu.price, store.store_name, store.address,store.notice
+        FROM cart
+        INNER JOIN User ON cart.pk_user=cart.pk_user
         INNER JOIN menu ON cart.menu_id = menu.id
+        INNER JOIN store ON cart.store_id = store.id
         WHERE cart.pk_user = ? AND cart.store_id = ?`;
     const params = [pk_user, store_id];
     const [rows, fields] = await pool.execute(query, params);
