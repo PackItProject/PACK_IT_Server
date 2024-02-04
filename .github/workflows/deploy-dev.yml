@@ -28,13 +28,13 @@ jobs:
                 - name: NODE_ENV
                   value: production
                 - name: DB_HOST
-                  value: ${{ secrets_DB_HOST }}
+                  value: ${{ secrets.DB_HOST }}
                 - name: DB_PORT
-                  value: ${{ secrets_DB_PORT }}
+                  value: ${{ secrets.DB_PORT }}
                 - name: DB_USER
-                  value: ${{ secrets_DB_USER }}
+                  value: ${{ secrets.DB_USER }}
                 - name: DB_PASSWORD
-                  value: ${{ secrets_DB_PASSWORD }}
+                  value: ${{ secrets.DB_PASSWORD }}
               ports: 3000
               install: npm ci
               build: npm run build
