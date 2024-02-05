@@ -1,11 +1,6 @@
-export const signinResponseDTO = (user, prefer) => {
-    const preferFood = [];
-    for (let i = 0; i < prefer[0].length; i++) {
-        preferFood.push(prefer[0][i].f_category_name);
-    }
-    return {"email": user[0].email, "name": user[0].user_name, "preferCategory": preferFood};
-}
-
+const storeData=require('../models/storeData.dto.js');
 export const storeListResponseDTO=()=>{
-    
+    success: true;
+        message: "주변 가게 목록 조회 성공";
+        stores: storesData;
 }

@@ -1,5 +1,3 @@
-import express from "express";
-
 const path=require('path');
 const express=require('express');
 const orderRouter=express.Router();
@@ -8,7 +6,7 @@ const mapController=require('../controllers/map.controller.js');
 const bookmarkController=require('../controllers/bookmark.controller.js');
 
 //지도에서 가게 접근
-orderRouter.get('?orderType=map/near/',mapController.);
+orderRouter.get('?orderType=map/near/',mapController);
 orderRouter.post('?orderType=map/near/bookmark');
 orderRouter.get('?orderType=map/near/{store-id}');
 orderRouter.post('r?orderType=map/near/{store-id}/bookmark');
