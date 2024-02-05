@@ -27,6 +27,35 @@ export const addItem = async (userId, storeId, menuId, quantity) => {
     }
 };
 
+//주문하기
+export const addOrderService = async (pk_user, store_id, requirement, payment, pickup_time, status, menus) => {
+    const created_at = new Date().toISOString().slice(0, 19).replace('T', ' '); // 현재 시간을 YYYY-MM-DD HH:MM:SS 형식으로 변환
+
+    const insertOrderQuery = `
+        INSERT INTO \`order\` (pk_user, store_id, requirement, payment, pickup_time, status, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    `;
+    const insertOrderParams = [pk_user, store_id, requirement, payment, pickup_time, status, created_at];
+    const [insertOrderRows, fields] = await pool.execute(insertOrderQuery, insertOrderParams);
+
+    const id = insertOrderRows.insertId;  // 새로 추가된 주문의 ID를 얻습니다.
+
+    for (const menu of menus) {  // 메뉴 정보 배열을 순회합니다.
+        const { menu_id, quantity } = menu;
+
+        const insertMenuQuery = `
+            INSERT INTO \`order_menu\` (id, menu_id, quantity)
+            VALUES (?, ?, ?)
+        `;
+        const insertMenuParams = [id, menu_id, quantity];
+        await pool.execute(insertMenuQuery, insertMenuParams);  // 각 메뉴에 대한 정보를 데이터베이스에 추가합니다.
+    }
+
+    return insertOrderRows;
+}
+
+
+
 
 export const getCartItems = async (pk_user, store_id) => {
     const query = `
@@ -41,6 +70,8 @@ export const getCartItems = async (pk_user, store_id) => {
 
     return rows;
 };
+
+
 
 
 

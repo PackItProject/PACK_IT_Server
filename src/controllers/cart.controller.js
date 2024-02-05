@@ -1,5 +1,6 @@
-import { addItem as addCartItem } from '../services/cart.service.js';
+import {addItem as addCartItem} from '../services/cart.service.js';
 import {getCartItems} from "../services/cart.service.js";
+import {addOrderService} from "../services/cart.service.js";
 
 export const addItem = async (req, res, next) => {
     const { userId, storeId, menuId, quantity } = req.body;
@@ -19,6 +20,25 @@ export const addItem = async (req, res, next) => {
     }
 };
 
+export const addOrderController = async (req, res, next) => {
+    const { pk_user, store_id, requirement, payment, pickup_time, status, menus } = req.body;
+    try {
+        const result = await addOrderService(pk_user, store_id, requirement, payment, pickup_time, status, menus);
+        if (result.affectedRows > 0) {  // 쿼리가 성공적으로 실행되었다면,
+            res.json({
+                message: "주문이 성공하였습니다."
+            });
+        } else {  // 쿼리가 실패하였다면,
+            res.status(500).json({
+                message: "주문이 실패하였습니다."
+            });
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+
 
 export const listCartItems = async (req, res, next) => {
     const { pk_user, store_id } = req.query;
@@ -35,5 +55,6 @@ export const listCartItems = async (req, res, next) => {
         next(error);
     }
 };
+
 
 
