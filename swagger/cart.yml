@@ -207,6 +207,44 @@ paths:
                 example: 1000
         500:
           description: 주문 내역 상세 조회에 실패하였습니다.
+  /cart/order/{order_id}:
+    delete:
+      tags:
+        - Order
+      summary: 주문 삭제
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: order_id
+          type: integer
+          required: true
+          description: 삭제할 주문의 ID
+      responses:
+        200:
+          description: 주문이 성공적으로 삭제되었습니다.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "주문이 성공적으로 삭제되었습니다."
+        404:
+          description: 삭제할 주문이 존재하지 않습니다.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "주문이 존재하지 않습니다."
+        500:
+          description: 서버 에러
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "서버 에러"
 
 definitions:
   CartItem:
