@@ -2,6 +2,7 @@ import {addItem as addCartItem, getOrderListDetailService} from '../services/car
 import {getCartItems} from "../services/cart.service.js";
 import {addOrderService} from "../services/cart.service.js";
 import { getOrderListsService } from '../services/cart.service.js';
+import {deleteOrderService} from '../services/cart.service.js'
 
 export const addItem = async (req, res, next) => {
     const { userId, storeId, menuId, quantity } = req.body;
@@ -76,3 +77,19 @@ export const getOrderDetail = async (req, res, next) => {
         next(err);
     }
 };
+
+//주문삭제
+export const deleteOrderController=async (req, res)=> {
+    const { order_id } = req.params;
+    try {
+        const result = await deleteOrderService(order_id);
+        if (result.affectedRows === 0) {
+            res.status(404).send({ message: '주문이 존재하지 않습니다.' });
+        } else {
+            res.status(200).send({ message: '주문이 성공적으로 삭제되었습니다.' });
+        }
+    } catch (error) {
+        res.status(500).send({ message: '서버 에러' });
+    }
+}
+

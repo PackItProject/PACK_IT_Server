@@ -1,5 +1,6 @@
 // cart.service.js
 import { pool } from '../../config/db.config.js';
+import mysql from "mysql2/promise";
 
 export const addItem = async (userId, storeId, menuId, quantity) => {
     // 먼저 해당 항목이 이미 있는지 확인합니다.
@@ -110,8 +111,13 @@ export const getOrderListDetailService = async (id) => {
     return rows;
 };
 
+//주문삭제
 
-
+export const deleteOrderService = async (order_id) => {
+    const query = 'DELETE FROM `order` WHERE id = ?';
+    const [result] = await pool.execute(query, [order_id]);
+    return result;
+};
 
 
 
