@@ -95,6 +95,22 @@ export const getOrderListsService = async (pk_user) => {
     return rows;
 };
 
+//주문 내역 상세
+export const getOrderListDetailService = async (id) => {
+    const query = `
+        SELECT store.store_name, \`order\`.pickup_time, menu.menu_name, menu.price, 
+        \`order\`.payment, \`order\`.fee
+        FROM \`order\`
+        INNER JOIN store ON \`order\`.store_id = store.id
+        INNER JOIN order_menu ON \`order\`.id = order_menu.id
+        INNER JOIN menu ON order_menu.menu_id = menu.id
+        WHERE \`order\`.id = ?
+    `;
+    const [rows, fields] = await pool.execute(query, [id]);
+    return rows;
+};
+
+
 
 
 

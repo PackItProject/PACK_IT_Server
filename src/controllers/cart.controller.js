@@ -1,4 +1,4 @@
-import {addItem as addCartItem} from '../services/cart.service.js';
+import {addItem as addCartItem, getOrderListDetailService} from '../services/cart.service.js';
 import {getCartItems} from "../services/cart.service.js";
 import {addOrderService} from "../services/cart.service.js";
 import { getOrderListsService } from '../services/cart.service.js';
@@ -23,11 +23,15 @@ export const addItem = async (req, res, next) => {
 
 export const addOrderController = async (req, res, next) => {
     const { pk_user, store_id, requirement, payment, pickup_time, status, menus, fee } = req.body;
+    console.log(pk_user, store_id, requirement, payment, pickup_time, status, menus, fee);
+
     try {
         const result = await addOrderService(pk_user, store_id, requirement, payment, pickup_time, status, menus, fee);
         if (result.affectedRows > 0) {  // 쿼리가 성공적으로 실행되었다면,
+            const orderId = result.insertId;  // 새로 추가된 주문의 ID를 얻습니다.
             res.json({
-                message: "주문이 성공하였습니다."
+                message: "주문이 성공하였습니다.",
+                orderId: orderId  // 주문 ID를 응답에 포함시킵니다.
             });
         } else {  // 쿼리가 실패하였다면,
             res.status(500).json({
@@ -61,4 +65,14 @@ export const getOrderListsController = async (req, res) => {
     const { pk_user } = req.params;
     const orderLists = await getOrderListsService(pk_user);
     res.json(orderLists);
+};
+
+export const getOrderDetail = async (req, res, next) => {
+    try {
+        const orderId = req.params.order_id;
+        const orderDetail = await getOrderListDetailService(orderId);
+        res.status(200).json(orderDetail);
+    } catch (err) {
+        next(err);
+    }
 };
