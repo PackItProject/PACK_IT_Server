@@ -1,8 +1,5 @@
 // cart.service.js
 import { pool } from '../../config/db.config.js';
-//const Cart = require('../models/cart.dto.js');
-//import Cart from '../models/cart.dto.js'
-import { CartDTO } from '../models/cart.dto.js';
 
 export const addItem = async (userId, storeId, menuId, quantity) => {
     // 먼저 해당 항목이 이미 있는지 확인합니다.
@@ -28,14 +25,16 @@ export const addItem = async (userId, storeId, menuId, quantity) => {
 };
 
 //주문하기
-export const addOrderService = async (pk_user, store_id, requirement, payment, pickup_time, status, menus) => {
+export const addOrderService = async (pk_user, store_id, requirement, payment, pickup_time, status, menus,fee) => {
+    console.log(pk_user, store_id, requirement, payment, pickup_time, status, menus, fee);
     const created_at = new Date().toISOString().slice(0, 19).replace('T', ' '); // 현재 시간을 YYYY-MM-DD HH:MM:SS 형식으로 변환
 
     const insertOrderQuery = `
-        INSERT INTO \`order\` (pk_user, store_id, requirement, payment, pickup_time, status, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO \`order\` (pk_user, store_id, requirement, payment, pickup_time, status, created_at,fee)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
-    const insertOrderParams = [pk_user, store_id, requirement, payment, pickup_time, status, created_at];
+
+    const insertOrderParams = [pk_user, store_id, requirement, payment, pickup_time, status, created_at, fee];
     const [insertOrderRows, fields] = await pool.execute(insertOrderQuery, insertOrderParams);
 
     const id = insertOrderRows.insertId;  // 새로 추가된 주문의 ID를 얻습니다.
@@ -72,6 +71,29 @@ export const getCartItems = async (pk_user, store_id) => {
 };
 
 
+export const getOrderListsService = async (pk_user) => {
+    const query = `
+        SELECT 
+            \`order\`.id, 
+            \`order\`.created_at, 
+            store.store_name, 
+            \`order\`.pickup_time, 
+            SUM(order_menu.quantity) as quantity
+        FROM User
+        INNER JOIN \`order\` ON User.pk_user=\`order\`.pk_user
+        INNER JOIN store ON \`order\`.store_id = store.id
+        INNER JOIN order_menu ON \`order\`.id=order_menu.id
+        WHERE User.pk_user=?
+        GROUP BY 
+            \`order\`.id, 
+            \`order\`.created_at, 
+            store.store_name, 
+            \`order\`.pickup_time
+    `;
+
+    const [rows] = await pool.execute(query, [pk_user]);
+    return rows;
+};
 
 
 
