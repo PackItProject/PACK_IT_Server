@@ -113,12 +113,53 @@ paths:
                     quantity:
                       type: integer
                       example: 3
+              fee:
+                type: integer
+                example: 33000
+
       responses:
         200:
           description: 주문이 성공적으로 추가되었습니다.
         500:
           description: 주문 추가에 실패하였습니다.
-
+  /cart/order/{pk_user}:
+    get:
+      tags:
+        - Order
+      summary: 주문 목록 조회
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pk_user
+          type: integer
+          required: true
+          description: 사용자 ID
+      responses:
+        200:
+          description: 주문 목록 조회에 성공하였습니다.
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                created_at:
+                  type: string
+                  example: "2024-02-05 13:45:02"
+                store_name:
+                  type: string
+                  example: "맛집"
+                pickup_time:
+                  type: string
+                  example: "2024-02-19 23:01:11"
+                quantity:
+                  type: integer
+                  example: 3
+        500:
+          description: 주문 목록 조회에 실패하였습니다.
 definitions:
   CartItem:
     type: object
