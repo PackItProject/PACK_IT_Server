@@ -30,3 +30,4 @@ bin/
 
 
 .env
+node_modules

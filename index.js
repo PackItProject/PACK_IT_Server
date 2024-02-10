@@ -3,6 +3,7 @@ import {tempRouter} from "./src/routes/temp.route.js";
 import { specs } from './config/swagger.config.js';
 import SwaggerUi from 'swagger-ui-express';
 import cartRouter from "./src/routes/cart.route.js";
+import storeRouter from './src/routes/store.route.js';
 import dotenv from "dotenv";
 import cors from "cors";
 
@@ -39,6 +40,11 @@ app.get('/hello', (req, res) => {
     console.log("/hello");
     res.send('패킷 랜딩 페이지');
 });
+
+
+// 가게 정보
+app.use('/order', storeRouter);
+
 
 app.use('/temp', tempRouter);
 
