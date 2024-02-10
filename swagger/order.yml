@@ -1,0 +1,49 @@
+paths:
+  /order/{store_id}/info:
+    get:
+      tags:
+        - Store
+      summary: 가게 정보 조회
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: store_id
+          type: integer
+          required: true
+          description: 가게 ID
+      response:
+        200:
+          description: 가게 정보 조회에 성공하였습니다.
+          schema:
+            type: object
+            properties:
+              store_name:
+                type: string
+                example: "맛집"
+              tel:
+                type: integer,
+                example: 0201010101
+              address:
+                type: string
+                example: "서대문구 대현동"
+              boss:
+                type: string
+                example: "사장"
+              license:
+                type: integer
+                example: 1
+              hours:
+                type: string
+                example: "3:00-9:00"
+              introduction:
+                type: string
+                example: "안녕하세요"
+              notice:
+                type: string
+                example: "주의사항"
+              status:
+                type: integer
+                example: 0
+        500:
+          description: 가게 정보 조회를 실패하였습니다.
