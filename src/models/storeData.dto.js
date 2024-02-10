@@ -36,7 +36,6 @@ module.exports=class storesData {
             console.error('Error finding storeId',error);
         }
     }
-
 }
 
 module.exports=class menu{
@@ -64,7 +63,7 @@ module.exports=class menu{
         }
     }
 
-    async findByMenuId(storeId, menuId){
+    async findByMenuId(storeId, menuId) {
         try{
             const store=this.findByStoreId(storeId);
             const menu=store.find(menu=>menu.id===menuId);
@@ -78,10 +77,85 @@ module.exports=class menu{
 
 }
 
+//메뉴 조회.
 module.exports=class meal{
 
+    constructor(storeId,type,menuId, menuName){
+        this.storeId=storeId;
+        this.type=type; //meal or side
+        this.menuId=menuId;
+        this.menuName=menuName;
+    }
+    async findByStoreId(id){
+        try{
+            const stores= await getStoresFromDB();
+
+            const store=stores.find(store => store.id===id);
+
+            return store;
+        }catch(error){
+            console.error('Error finding storeId',error);
+        }
+    }
+    async showMeal(storeId){
+        try {
+            const store = await findByStoreId(storeId);
+            const meal = store.findAll(); //이러면 메뉴 다 불러올 수 있는지 확인.
+
+            return meal;
+        }
+        catch(error){
+            console.error('Error showing meal',error);
+        }
+    }
+
+
 }
+//메뉴조회.
 module.exports=class side{
+
+    constructor(storeId,type,menuId, menuName){
+        this.storeId=storeId;
+        this.type=type; //meal or side
+        this.menuId=menuId;
+        this.menuName=menuName;
+    }
+
+    async findByStoreId(id){
+        try{
+            const stores= await getStoresFromDB();
+
+            const store=stores.find(store => store.id===id);
+
+            return store;
+        }catch(error){
+            console.error('Error finding storeId',error);
+        }
+    }
+
+    async findByStoreId(id){
+        try{
+            const stores= await getStoresFromDB();
+
+            const store=stores.find(store => store.id===id);
+
+            return store;
+        }catch(error){
+            console.error('Error finding storeId',error);
+        }
+    }
+    async showSide(storeId){
+
+        try{
+        const store=await findByStoreId(storeId);
+        const side=store.findAll();
+
+        return side;
+        }
+        catch(error){
+            console.error('Error showing meal',error);
+        }
+    }
 
 }
 

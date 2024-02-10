@@ -67,5 +67,35 @@ exports.getMenuById=(req,res,next)=>{
 
     res.json(response);
 }
+//식사류 조회
+exports.getMeal=(req,res,next)=>{
+    const orderType = req.query.orderType || 'map';
+    const storeId=req.body.params;
 
+    const menu=storeData.showMeal(storeId);
 
+    const response={
+        storeId: storeId,
+        type: menu.type,
+        menuId: menu.menuId,
+        menuName: menu.menuName
+    }
+
+    res.json(response);
+
+}
+//사이드 메뉴 조회
+exports.getSide=(req,res,next)=>{
+    const orderType = req.query.orderType || 'map';
+    const storeId=req.body.params;
+
+    const side=storeData.showSide(storeId);
+
+    const response={
+        storeId: storeId,
+        type: menu.type,
+        menuId: menu.menuId,
+        menuName: menu.menuName
+    }
+
+}
