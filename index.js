@@ -41,15 +41,16 @@ app.get('/hello', (req, res) => {
     res.send('패킷 랜딩 페이지');
 });
 
+
+// 가게 정보
+app.use('/order', storeRouter);
+
+
 app.use('/temp', tempRouter);
 
 
 //장바구니
 app.use('/cart',cartRouter);
-
-
-// 가게 정보
-app.use('/order', storeRouter);
 
 
 

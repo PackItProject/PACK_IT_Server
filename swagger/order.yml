@@ -10,6 +10,7 @@ paths:
         - in: path
           name: store_id
           type: integer
+          example: 1
           required: true
           description: 가게 ID
       response:
