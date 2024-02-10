@@ -3,10 +3,7 @@ import { getStoreInfo } from '../services/store.service.js';
 import { response } from '../../config/response.js';
 
 export const storeInfo = async (req, res, next) => {
-    console.log("storeInfo 실행됨");
-    console.log("req.params is ", req.params);
     const { store_id } = req.params;
-    console.log("여기로 넘어옴");
     console.log("store id is ", store_id);
 
     if (!store_id) {
