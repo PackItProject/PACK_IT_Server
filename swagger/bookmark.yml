@@ -1,0 +1,34 @@
+paths:
+  /bookmark/{pk_user}:
+    get:
+      tags:
+        - Bookmark
+      summary: 북마크된 가게 조회
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pk_user
+          type: integer
+          required: true
+          description: 사용자 ID
+      responses:
+        200:
+          description: 북마크된 가게 조회를 성공했습니다.
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                store_name:
+                  type: string
+                status:
+                  type: integer
+                grade:
+                  type: number
+                address:
+                  type: string
+                bookmark:
+                  type: integer
+        500:
+          description: 북마크된 가게 조회를 실패하였습니다.
