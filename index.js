@@ -4,6 +4,7 @@ import { specs } from './config/swagger.config.js';
 import SwaggerUi from 'swagger-ui-express';
 import cartRouter from "./src/routes/cart.route.js";
 import storeRouter from './src/routes/store.route.js';
+import bookmarkRouter from './src/routes/bookmark.route.js'
 import dotenv from "dotenv";
 import cors from "cors";
 
@@ -51,6 +52,9 @@ app.use('/temp', tempRouter);
 
 //장바구니
 app.use('/cart',cartRouter);
+
+//북마크
+app.use('/bookmark',bookmarkRouter)
 
 
 

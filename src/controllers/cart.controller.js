@@ -24,7 +24,6 @@ export const addItem = async (req, res, next) => {
 
 export const addOrderController = async (req, res, next) => {
     const { pk_user, store_id, requirement, payment, pickup_time, status, menus, fee } = req.body;
-    console.log(pk_user, store_id, requirement, payment, pickup_time, status, menus, fee);
 
     try {
         const result = await addOrderService(pk_user, store_id, requirement, payment, pickup_time, status, menus, fee);
