@@ -1,7 +1,13 @@
 const express=require('express');
 const response=require('../../config/response.js');
 const status=require('../../config/response.status.js');
-const storeData=require('../models/storeData.dto.js');
+const storesData=require('../models/storeData.dto.js');
+const getStoresFromDB=require('../services/map.service.js');
+const addMenu=require('../services/map.service.js');
+const findByStoreId=require('../services/map.service.js');
+const findByMenuId=require('../services/map.service.js');
+const showMeal=require('../services/map.service.js');
+const showSide=require('../services/map.service.js');
 
 exports.getStoreList=(req, res,next)=>{
 
