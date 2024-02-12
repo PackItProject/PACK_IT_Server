@@ -9,26 +9,64 @@ paths:
       parameters:
         - in: path
           name: pk_user
-          type: integer
+          schema:
+            type: integer
           required: true
           description: 사용자 ID
       responses:
         200:
-          description: 북마크된 가게 조회를 성공했습니다.
-          schema:
-            type: array
-            items:
-              type: object
-              properties:
-                store_name:
-                  type: string
-                status:
-                  type: integer
-                grade:
-                  type: number
-                address:
-                  type: string
-                bookmark:
-                  type: integer
+          description: 북마크된 가게 조회에 성공하였습니다.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    store_id:
+                      type: integer
+                    store_name:
+                      type: string
+                    status:
+                      type: integer
+                    grade:
+                      type: number
+                    address:
+                      type: string
         500:
-          description: 북마크된 가게 조회를 실패하였습니다.
+          description: 북마크된 가게 조회에 실패하였습니다.
+
+
+  /bookmark/{store_id}/{pk_user}:
+    post:
+      tags:
+        - Bookmark
+      summary: 특정 사용자의 특정 가게에 대한 북마크 상태 변경
+      parameters:
+        - in: path
+          name: store_id
+          schema:
+            type: integer
+          required: true
+          description: 북마크 상태를 변경하려는 가게의 ID
+        - in: path
+          name: pk_user
+          schema:
+            type: integer
+          required: true
+          description: 북마크 상태를 변경하려는 사용자의 ID
+      responses:
+        200:
+          description: 북마크 상태가 성공적으로 변경되었습니다.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "북마크가 성공적으로 변경되었습니다."
+        400:
+          description: 유효하지 않은 요청입니다.
+        500:
+          description: 서버 에러
