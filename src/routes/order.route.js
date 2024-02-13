@@ -2,7 +2,7 @@ const path=require('path');
 const express=require('express');
 const orderRouter=express.Router();
 
-const {getStoreListController,getStoreInfoController,postBookmarkController, getMenuController, showMealController,showSideController}=require('../controllers/store.controller.js);
+const {getStoreListController,getStoreInfoController,postBookmarkController, getMenuController, showMealController,showSideController, searchByStoreNameController}=require('../controllers/store.controller.js);
 const bookmarkController=require('../controllers/bookmark.controller.js');
 const {getMeal} = require("../controllers/map.controller.js");
 
@@ -15,7 +15,7 @@ orderRouter.post('r?orderType=map/near/:store_id/bookmark',postBookmarkControlle
 orderRouter.get('?orderType=map/near/:store_id/:menu_id}',getMenuController);
 orderRouter.get('?orderType=map/near/:store_id/meal',showMealController);
 orderRouter.get('?orderType=map/near/:store_id/side',showSideController);
-orderRouter.get('?orderType=map/search/:store_id');
+orderRouter.get('?orderType=map/search/:store_name', searchByStoreNameController);
 
 
 //북마크에서 가게 접근

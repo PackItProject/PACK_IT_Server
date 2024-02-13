@@ -6,6 +6,7 @@ import{ getByStoreId} from "../services/store.service.js";
 import {getByMenuId} from "../services/store.service.js";
 import {getMeal} from "../services/store.service.js";
 import {getSide} from "../services/store.service.js";
+import {searchByStoreName} from "../services/store.service.js";
 
 export const getStoreListController=async(req,res,next)=>{
     try{
@@ -91,6 +92,19 @@ export const showSideController=async(req,res,next)=>{
     try{
         const side=getSide(storeId);
         res.json(side);
+        next();
+    }
+    catch(error){
+        console.error('Error finding side',error);
+        next(error);
+    }
+};
+
+export const searchByStoreNameController=async(req,res,next)=>{
+    const {store_name}=req.params;
+    try{
+        const store=await searchByStoreName(store_name);
+        res.json(store);
         next();
     }
     catch(error){

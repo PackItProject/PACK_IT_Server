@@ -38,3 +38,11 @@ export const getSide=async(storeId)=>{
 
     return rows[0];
 }
+
+export const searchByStoreName=async(storeName)=>{
+    const query='SELECT menu.* FROM menu WHERE storeName=?';
+    const param=[storeName];
+    const rows=await pool.execute(query, param);
+
+    return rows[0];
+}
