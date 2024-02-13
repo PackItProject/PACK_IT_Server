@@ -12,13 +12,6 @@ async function getStoresFromDB(){
     }
 }
 
-
-    //메뉴 추가
- function addMenu(type, menuId, menuName, description, price, size, insulation, liquidSealed, caution) {
-        const menu = new Menu(menuId, menuName, description, price, size, insulation, liquidSealed, caution);
-        this.menus.set(menuId, menuName);
-    }
-
     //storeId로 가게 찾기
 async function findByStoreId(id){
     try{
@@ -31,6 +24,8 @@ async function findByStoreId(id){
         console.error('Error finding storeId',error);
     }
 }
+
+
 
     //menuId로 가게 찾기
 async function findByMenuId(storeId, menuId) {

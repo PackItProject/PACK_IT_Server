@@ -7,3 +7,28 @@ export const getStoreInfo = async (store_id) => {
 
     return rows[0];
 }
+
+//menuId로 메뉴 조회
+export const getByMenuId=async(storeId, menuId)=>{
+    const query='SELECT menu.* FROM menu WHERE store_id=? AND menu_id=? ';
+    const params=[storeId, menuId];
+    const rows=await pool.execute(query, params);
+
+    return rows[0];
+}
+
+export const getMeal=async(storeId)=>{
+    const query='SELECT menu.* FROM menu WHERE store_id=? AND menu_type=meal';
+    const param=[storeId];
+    const rows=await pool.execute(query, param);
+
+    return rows[0];
+}
+
+export const getMeal=async(storeId)=>{
+    const query='SELECT menu.* FROM menu WHERE store_id=? AND menu_type=side';
+    const param=[storeId];
+    const rows=await pool.execute(query, param);
+
+    return rows[0];
+}
