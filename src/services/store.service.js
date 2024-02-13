@@ -1,6 +1,12 @@
 import { pool } from '../../config/db.config.js';
 
-export const getStoreInfo = async (store_id) => {
+export const getStoreList=async() =>{
+    const query='SELECT store.* FROM store';
+    const rows=await pool.execute(query);
+
+    return rows;
+}
+export const getByStoreId = async (store_id) => {
     const query = ' SELECT store.* FROM store WHERE store_id = ?';
     const params = [store_id];
     const rows = await pool.execute(query, params);
@@ -25,7 +31,7 @@ export const getMeal=async(storeId)=>{
     return rows[0];
 }
 
-export const getMeal=async(storeId)=>{
+export const getSide=async(storeId)=>{
     const query='SELECT menu.* FROM menu WHERE store_id=? AND menu_type=side';
     const param=[storeId];
     const rows=await pool.execute(query, param);
