@@ -20,7 +20,7 @@ orderRouter.get('?orderType=map/search/:store_name', searchByStoreNameController
 
 //북마크에서 가게 접근
 orderRouter.get('?orderType=bookmark/:store_id',getStoreInfoController);
-orderRouter.get('?orderType=bookmark/:store_id/:menu-id',getMenuController);
+orderRouter.get('?orderType=bookmark/:store_id/:menu_id',getMenuController);
 orderRouter.get('?orderType=bookmark/:store_id/meal',showMealController);
 orderRouter.get('?orderType=bookmark/:store_id/side',showSideController);
 
