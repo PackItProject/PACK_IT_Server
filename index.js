@@ -3,12 +3,8 @@ import {tempRouter} from "./src/routes/temp.route.js";
 import { specs } from './config/swagger.config.js';
 import SwaggerUi from 'swagger-ui-express';
 import cartRouter from "./src/routes/cart.route.js";
-<<<<<<< HEAD
-import orderRouter from "./src/routes/order.route.js";
-=======
 import storeRouter from './src/routes/store.route.js';
 import bookmarkRouter from './src/routes/bookmark.route.js'
->>>>>>> a645609c6741be19de5cf9797a0d3e1989e02179
 import dotenv from "dotenv";
 import cors from "cors";
 
@@ -52,9 +48,6 @@ app.use('/order', storeRouter);
 
 
 app.use('/temp', tempRouter);
-//지도와 북마크에서 가게 접근
-app.use('/order',orderRouter);
-
 
 
 //장바구니
