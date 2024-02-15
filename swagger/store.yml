@@ -172,5 +172,166 @@ paths:
                       type: string
         500:
           description: 사이드메뉴 조회에 실패하였습니다.
+  /order/map/search/{store_name}:
+    get:
+      tags:
+        - Store
+      summary: store_name으로 가게 조회
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: store_name
+          schema:
+            type: string
+          required: true
+          description: 가게 이름
+      responses:
+        200:
+          description: 가게명으로 가게 찾기에 성공하였습니다.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    store_id:
+                      type: integer
+                    store_name:
+                      type: string
+                    status:
+                      type: integer
+                    grade:
+                      type: double
+                    tel:
+                      type: string
+                    address:
+                      type: string
+                    image:
+                      type: string
+        500:
+          description: 가게명 조회에 실패하였습니다.
 
+  /order/bookmark/{store_id}:
+    get:
+      tags:
+        - Store
+      summary: storeId로 가게 조회
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: store_id
+          schema:
+            type: integer
+          required: true
+          description: 가게 ID
+      responses:
+        200:
+          description: 가게 조회에 성공하였습니다.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    store_id:
+                      type: integer
+                    store_name:
+                      type: string
+                    status:
+                      type: integer
+                    grade:
+                      type: number
+                    tel:
+                      type: string
+                    address:
+                      type: string
+                    image:
+                      type: string
+        500:
+          description: 가게 조회에 실패하였습니다.
+  /order/bookmark/{store_id}/meal:
+    get:
+      tags:
+        - Store
+      summary: storeId로 식사류 조회
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: store_id
+          schema:
+            type: integer
+          required: true
+          description: 가게 ID
+      responses:
+        200:
+          description: 식사류 조회에 성공하였습니다.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    store_id:
+                      type: integer
+                    type:
+                      type: string
+                    menu_id:
+                      type: integer
+                    menu_name:
+                      type: string
+                    price:
+                      type: integer
+                    size:
+                      type: string
+                    image:
+                      type: string
+          500:
+            description: 식사류 조회에 실패하였습니다.
+
+  /order/bookmark/{store_id}/side:
+    get:
+      tags:
+        - Store
+      summary: storeId로 사이드메뉴 조회
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: store_id
+          schema:
+            type: integer
+          required: true
+          description: 가게 ID
+      responses:
+        200:
+          description: 사이드메뉴 조회에 성공하였습니다.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    store_id:
+                      type: integer
+                    type:
+                      type: string
+                    menu_id:
+                      type: integer
+                    menu_name:
+                      type: string
+                    price:
+                      type: integer
+                    size:
+                      type: string
+                    image:
+                      type: string
+        500:
+          description: 사이드메뉴 조회에 실패하였습니다.
 
