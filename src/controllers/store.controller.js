@@ -115,7 +115,7 @@ export const searchByStoreNameController=async(req,res,next)=>{
     }
 };
 
-export const getNearbyRestaurantList=async(req,res,next)=>{
+export const getNearbyRestaurantListController=async(req,res,next)=>{
 
     loadNearbyRestaurantsWithLoader().then(() => {
         console.log("Nearby restaurants loaded successfully!");
