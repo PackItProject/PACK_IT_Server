@@ -1,5 +1,5 @@
 //구글 맵 API 작성
-import { Loader } from "@googlemaps/js-api-loader"
+import { Loader } from "@googlemaps/js-api-loader";
 
 //API 로딩
 const loader = new Loader({
