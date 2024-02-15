@@ -1,5 +1,4 @@
-const path=require('path');
-const express=require('express');
+import express from "express";
 export const orderRouter=express.Router();
 
 import {getStoreListController,getByStoreIdController, getMenuController, showMealController, showSideController, searchByStoreNameController,getNearbyRestaurantListController
@@ -17,7 +16,7 @@ orderRouter.get('/order/map/search/:store_name', searchByStoreNameController);
 
 
 //북마크에서 가게 접근
-orderRouter.get('/order/bookmark/:store_id',getStoreInfoController);
+orderRouter.get('/order/bookmark/:store_id',getByStoreIdController);
 orderRouter.get('/order/bookmark/:store_id/menu/:menu_id',getMenuController);
 orderRouter.get('/order/bookmark/:store_id/meal',showMealController);
 orderRouter.get('/order/bookmark/:store_id/side',showSideController);
