@@ -10,7 +10,7 @@ import { loadNearbyRestaurantsWithLoader } from '../services/map.service.js';
 
 export const getStoreListController=async(req,res,next)=>{
     try{
-        const storeList=getStoreList();
+        const storeList=await getStoreList();
         res.json(storeList);
         next();
     }
@@ -62,7 +62,7 @@ export const showMealController=async(req,res,next)=>{
         console.log('잘못된 storeId입니다.')
     }
     try{
-        const meal=getMeal(storeId);
+        const meal=await getMeal(storeId);
         res.json(meal);
         next();
     }
@@ -79,7 +79,7 @@ export const showSideController=async(req,res,next)=>{
         console.log('잘못된 storeId입니다.')
     }
     try{
-        const side=getSide(storeId);
+        const side=await getSide(storeId);
         res.json(side);
         next();
     }
@@ -103,10 +103,10 @@ export const searchByStoreNameController=async(req,res,next)=>{
 };
 
 export const getNearbyRestaurantListController=async(req,res,next)=>{
-
-    loadNearbyRestaurantsWithLoader().then(() => {
+    try {
+       await loadNearbyRestaurantsWithLoader();
         console.log("Nearby restaurants loaded successfully!");
-    }).catch((error) => {
+    }catch(error) {
         console.error("Failed to load nearby restaurants:", error);
-    });
+    }
 }

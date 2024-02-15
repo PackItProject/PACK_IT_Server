@@ -2,6 +2,7 @@ import { pool } from '../../config/db.config.js';
 
 export const getStoreList=async() =>{
 
+    const query='SELECT * FROM store';
     const [rows]=await pool.execute(query);
 
     return rows;
