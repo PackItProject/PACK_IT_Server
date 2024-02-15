@@ -6,8 +6,7 @@ const { Loader } = pkg;
 //API 로딩
 const loader = new Loader({
     apiKey: "AIzaSyA9bzTkN3LjMZDDwLZRYMWVp4dfnQw_tjk",
-    version: "weekly",
-    ...additionalOptions,
+    version: "weekly"
 });
 //1.주변에 있는 식당 반환
 // restaurants.js
