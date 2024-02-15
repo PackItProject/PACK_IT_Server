@@ -1,14 +1,12 @@
 import { status } from '../../config/response.status.js';
 import { response } from '../../config/response.js';
-import {getBookmarkedStoreService, postBookmarkService} from "../services/bookmark.service.js";
 import{ getStoreList} from "../services/store.service.js";
 import{ getByStoreId} from "../services/store.service.js";
 import {getByMenuId} from "../services/store.service.js";
 import {getMeal} from "../services/store.service.js";
 import {getSide} from "../services/store.service.js";
 import {searchByStoreName} from "../services/store.service.js";
-import { loadNearbyRestaurantsWithLoader } from './restaurants.js';
-
+import { loadNearbyRestaurantsWithLoader } from '../services/map.service.js';
 
 export const getStoreListController=async(req,res,next)=>{
     try{
@@ -21,7 +19,7 @@ export const getStoreListController=async(req,res,next)=>{
         next (error);
     }
 }
-export const getStoreInfoController = async (req, res, next) => {
+export const getByStoreIdController = async (req, res, next) => {
     const { store_id } = req.params;
     console.log("store id is ", store_id);
 
@@ -36,17 +34,6 @@ export const getStoreInfoController = async (req, res, next) => {
     } catch(error) {
         console.error(error);
         next (error);
-    }
-};
-
-//북마크 생성
-export const postBookmarkController=async(req,res,next)=>{
-    const { store_id, pk_user } = req.params;
-    try {
-        await postBookmarkService(store_id, pk_user);
-        res.status(200).send({ message: '북마크가 성공적으로 변경되었습니다.' });
-    } catch (error) {
-        next(error);
     }
 };
 

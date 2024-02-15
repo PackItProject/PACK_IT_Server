@@ -1,16 +1,14 @@
 const path=require('path');
 const express=require('express');
-const orderRouter=express.Router();
+export const orderRouter=express.Router();
 
-const {getStoreListController,getStoreInfoController,postBookmarkController, getMenuController, showMealController,showSideController, searchByStoreNameController,getNearbyRestaurantListController}=require('../controllers/store.controller.js');
-const bookmarkController=require('../controllers/bookmark.controller.js');
-const {getBookmarkedStoreController} = require("../controllers/bookmark.controller.js");
-const bookmarkRouter = require("./bookmark.route.js");
+import {getStoreListController,getByStoreIdController, getMenuController, showMealController, showSideController, searchByStoreNameController,getNearbyRestaurantListController
+} from "../controllers/store.controller.js";
 
 //지도에서 가게 접근
 orderRouter.get('/order',getNearbyRestaurantListController);
 orderRouter.get('/order/map/near',getStoreListController);
-orderRouter.get('/order/map/near/:store_id',getStoreInfoController);
+orderRouter.get('/order/map/near/:store_id',getByStoreIdController);
 
 orderRouter.get('/order/map/near/:store_id/menu/:menu_id}',getMenuController);
 orderRouter.get('/order/map/near/:store_id/meal',showMealController);
