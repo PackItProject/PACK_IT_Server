@@ -4,14 +4,13 @@ const orderRouter=express.Router();
 
 const {getStoreListController,getStoreInfoController,postBookmarkController, getMenuController, showMealController,showSideController, searchByStoreNameController,getNearbyRestaurantListController}=require('../controllers/store.controller.js);
 const bookmarkController=require('../controllers/bookmark.controller.js');
-const {getMeal} = require("../controllers/map.controller.js");
+const {getBookmarkedStoreController} = require("../controllers/bookmark.controller.js");
+const bookmarkRouter = require("./bookmark.route.js");
 
 //지도에서 가게 접근
 orderRouter.get('/order',getNearbyRestaurantListController);
 orderRouter.get('?orderType=map/near/',getStoreListController);
-orderRouter.post('?orderType=map/near/bookmark',postBookmarkController);
 orderRouter.get('?orderType=map/near/:store_id',getStoreInfoController);
-orderRouter.post('r?orderType=map/near/:store_id/bookmark',postBookmarkController);
 
 orderRouter.get('?orderType=map/near/:store_id/:menu_id}',getMenuController);
 orderRouter.get('?orderType=map/near/:store_id/meal',showMealController);

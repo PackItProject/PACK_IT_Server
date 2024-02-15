@@ -52,13 +52,13 @@ export const postBookmarkController=async(req,res,next)=>{
 
 //menuId로 메뉴 조회
 export const getMenuController=async(req,res,next)=>{
-    const storeId=req.params;
+    const {storeId, menuId}=req.params;
 
     if(!storeId){
         console.log('잘못된 storeId입니다. ')
     }
     try{
-        const menu=await getMenu(storeId);
+        const menu=await getByMenuId(storeId,menuId);
         res.json(menu);
         next();
     }

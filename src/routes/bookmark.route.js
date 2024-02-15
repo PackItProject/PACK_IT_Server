@@ -6,7 +6,7 @@ import {getBookmarkedStoreController, postBookmarkController} from "../controlle
 
 const bookmarkRouter=express.Router();
 
-bookmarkRouter.get('?orderType=bookmark/:pk_user',getBookmarkedStoreController);
-bookmarkRouter.post('?orderType=bookmark/:store_id/:pk_user',postBookmarkController)
+bookmarkRouter.get('/bookmark/:pk_user',getBookmarkedStoreController);
+bookmarkRouter.post('/bookmark/:store_id/:pk_user',postBookmarkController);
 
 export default bookmarkRouter;
