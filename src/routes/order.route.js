@@ -2,7 +2,7 @@ const path=require('path');
 const express=require('express');
 const orderRouter=express.Router();
 
-const {getStoreListController,getStoreInfoController,postBookmarkController, getMenuController, showMealController,showSideController, searchByStoreNameController,getNearbyRestaurantListController}=require('../controllers/store.controller.js);
+const {getStoreListController,getStoreInfoController,postBookmarkController, getMenuController, showMealController,showSideController, searchByStoreNameController,getNearbyRestaurantListController}=require('../controllers/store.controller.js');
 const bookmarkController=require('../controllers/bookmark.controller.js');
 const {getBookmarkedStoreController} = require("../controllers/bookmark.controller.js");
 const bookmarkRouter = require("./bookmark.route.js");
