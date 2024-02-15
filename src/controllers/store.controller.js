@@ -12,7 +12,6 @@ export const getStoreListController=async(req,res,next)=>{
     try{
         const storeList=await getStoreList();
         res.json(storeList);
-        next();
     }
     catch(error){
         console.error(error);
@@ -30,7 +29,6 @@ export const getByStoreIdController = async (req, res, next) => {
     try {
         const aboutStore = await getByStoreId(store_id);
         res.json(aboutStore);
-        next();
     } catch(error) {
         console.error(error);
         next (error);
@@ -47,7 +45,6 @@ export const getMenuController=async(req,res,next)=>{
     try{
         const menu=await getByMenuId(storeId,menuId);
         res.json(menu);
-        next();
     }
     catch(error){
         console.error('Error finding menu',error);
@@ -64,7 +61,6 @@ export const showMealController=async(req,res,next)=>{
     try{
         const meal=await getMeal(storeId);
         res.json(meal);
-        next();
     }
     catch(error){
         console.error('Error finding meal',error);
@@ -81,7 +77,6 @@ export const showSideController=async(req,res,next)=>{
     try{
         const side=await getSide(storeId);
         res.json(side);
-        next();
     }
     catch(error){
         console.error('Error finding side',error);
@@ -94,7 +89,6 @@ export const searchByStoreNameController=async(req,res,next)=>{
     try{
         const store=await searchByStoreName(store_name);
         res.json(store);
-        next();
     }
     catch(error){
         console.error('Error finding side',error);
