@@ -6,7 +6,7 @@ import {getStoreListController,getByStoreIdController, getMenuController, showMe
 } from "../controllers/store.controller.js";
 
 //지도에서 가게 접근
-orderRouter.get('/order',getNearbyRestaurantListController);
+orderRouter.get('/order/map',getNearbyRestaurantListController);
 orderRouter.get('/order/map/near',getStoreListController);
 orderRouter.get('/order/map/near/:store_id',getByStoreIdController);
 
