@@ -1,8 +1,10 @@
 //구글 맵 API 작성
-import { Loader } from "@googlemaps/js-api-loader";
+//import { Loader } from "@googlemaps/js-api-loader";
+import pkg from '@googlemaps/js-api-loader';
+const { Loader } = pkg;
 
 //API 로딩
-const Loader = new Loader({
+const loader = new Loader({
     apiKey: "AIzaSyA9bzTkN3LjMZDDwLZRYMWVp4dfnQw_tjk",
     version: "weekly",
     ...additionalOptions,
