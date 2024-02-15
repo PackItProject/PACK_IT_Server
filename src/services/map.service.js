@@ -2,7 +2,7 @@
 import { Loader } from "@googlemaps/js-api-loader";
 
 //API 로딩
-const loader = new Loader({
+const Loader = new Loader({
     apiKey: "AIzaSyA9bzTkN3LjMZDDwLZRYMWVp4dfnQw_tjk",
     version: "weekly",
     ...additionalOptions,
