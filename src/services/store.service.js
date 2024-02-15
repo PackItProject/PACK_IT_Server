@@ -9,7 +9,7 @@ export const getStoreList=async() =>{
 }
 export const getByStoreId = async (store_id) => {
     const query=`
-        SELECT store.store_id, store.store_image, menu.type,menu.menu_id, menu.menu_name, menu.menu_image,menu.price, menu.size 
+        SELECT store.store_id, store.image, menu.type,menu.menu_id, menu.menu_name, menu.menu_image,menu.price, menu.size 
     FROM store 
     INNER JOIN menu on store.store_id=menu.store_id
     WHERE store.store_id=?
@@ -30,7 +30,7 @@ export const getByMenuId=async(storeId, menuId)=>{
 }
 
 export const getMeal=async(storeId)=>{
-    const query='SELECT menu.* FROM menu WHERE store_id=? AND menu_type=meal';
+    const query='SELECT menu.* FROM menu WHERE store_id=? AND menu_type="meal"';
     const param=[storeId];
     const [rows]=await pool.execute(query, param);
 
@@ -38,7 +38,7 @@ export const getMeal=async(storeId)=>{
 }
 
 export const getSide=async(storeId)=>{
-    const query='SELECT menu.* FROM menu WHERE store_id=? AND menu_type=side';
+    const query='SELECT menu.* FROM menu WHERE store_id=? AND menu_type="side"';
     const param=[storeId];
     const [rows]=await pool.execute(query, param);
 
@@ -46,7 +46,7 @@ export const getSide=async(storeId)=>{
 }
 
 export const searchByStoreName=async(storeName)=>{
-    const query='SELECT menu.* FROM menu WHERE storeName=?';
+    const query='SELECT menu.* FROM menu WHERE store_name=?';
     const param=[storeName];
     const [rows]=await pool.execute(query, param);
 
