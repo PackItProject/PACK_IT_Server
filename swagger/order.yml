@@ -13,7 +13,7 @@ paths:
           example: 1
           required: true
           description: 가게 ID
-      response:
+      responses:
         200:
           description: 가게 정보 조회에 성공하였습니다.
           schema:
@@ -23,8 +23,8 @@ paths:
                 type: string
                 example: "맛집"
               tel:
-                type: integer
-                example: 0201010101
+                type: string
+                example: "0201010101"
               address:
                 type: string
                 example: "서대문구 대현동"
@@ -62,7 +62,7 @@ paths:
             example: 1
             required: true
             description: 가게 ID
-        response:
+        responses:
           200:
             description: 가게 리뷰 조회에 성공하였습니다.
             schema:
@@ -78,7 +78,7 @@ paths:
                   type: string
                   example: "리뷰 내용"
                 image:
-                  type: image
-                  example: "리뷰 이미지"
+                  type: string
+                  example: "리뷰 이미지 url"
           500:
             description: 가게 리뷰 조회를 실패하였습니다.
