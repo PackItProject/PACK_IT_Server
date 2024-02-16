@@ -39,13 +39,10 @@ paths:
                 example: "3:00-9:00"
               introduction:
                 type: string
-                example: "안녕하세요"
+                example: "안녕하세요, 맛집입니다"
               notice:
                 type: string
-                example: "주의사항"
-              status:
-                type: integer
-                example: 0
+                example: "공지사항"
         500:
           description: 가게 정보 조회를 실패하였습니다.
   /order/{store_id}/grade:
@@ -68,9 +65,9 @@ paths:
             schema:
               type: object
               properties:
-                pk_user:
-                  type: integer
-                  example: 1
+                nickname:
+                  type: string
+                  example: "익명1"
                 grade:
                   type: float
                   example: 4.5
