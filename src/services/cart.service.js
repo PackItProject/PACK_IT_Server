@@ -59,13 +59,12 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 
 export const getCartItems = async (pk_user, store_id) => {
     const query = `
-        SELECT cart.*, User.name, User.phone_number, menu.menu_name, menu.price, store.store_name, store.address, store.notice
+        SELECT cart.*, User.name, User.phone_number, menu.menu_name, menu.price, store.store_name, store.address, store.notice,menu.image
         FROM cart
                  INNER JOIN User ON User.pk_user = cart.pk_user
                  INNER JOIN menu ON cart.menu_id = menu.id
                  INNER JOIN store ON cart.store_id = store.store_id
         WHERE cart.pk_user = ? AND cart.store_id = ?
-
     `;
     const params = [pk_user, store_id];
     const [rows, fields] = await pool.execute(query, params);
@@ -73,25 +72,24 @@ export const getCartItems = async (pk_user, store_id) => {
     return rows;
 };
 
-
+//주문내역
 export const getOrderListsService = async (pk_user) => {
     const query = `
-        SELECT 
-            \`order\`.id, 
-            \`order\`.created_at, 
-            store.store_name, 
-            \`order\`.pickup_time, 
-            SUM(order_menu.quantity) as quantity
+        SELECT \`order\`.id,
+               \`order\`.created_at,
+               store.store_name,
+               \`order\`.pickup_time,
+               SUM(order_menu.quantity) as quantity,
+               store.image
         FROM User
-        INNER JOIN \`order\` ON User.pk_user=\`order\`.pk_user
-        INNER JOIN store ON \`order\`.store_id = store.store_id
-        INNER JOIN order_menu ON \`order\`.id=order_menu.id
-        WHERE User.pk_user=?
-        GROUP BY 
-            \`order\`.id, 
-            \`order\`.created_at, 
-            store.store_name, 
-            \`order\`.pickup_time
+                 INNER JOIN \`order\` ON User.pk_user = \`order\`.pk_user
+                 INNER JOIN store ON \`order\`.store_id = store.store_id
+                 INNER JOIN order_menu ON \`order\`.id = order_menu.id
+        WHERE User.pk_user = ?
+        GROUP BY \`order\`.id,
+                 \`order\`.created_at,
+                 store.store_name,
+                 \`order\`.pickup_time
     `;
 
     const [rows] = await pool.execute(query, [pk_user]);
@@ -100,18 +98,18 @@ export const getOrderListsService = async (pk_user) => {
 
 //주문 내역 상세
 export const getOrderListDetailService = async (id) => {
-    const query = `
-        SELECT store.store_name, \`order\`.pickup_time, menu.menu_name, menu.price, 
-        \`order\`.payment, \`order\`.fee
-        FROM \`order\`
-        INNER JOIN store ON \`order\`.store_id = store.store_id
-        INNER JOIN order_menu ON \`order\`.id = order_menu.id
-        INNER JOIN menu ON order_menu.menu_id = menu.id
-        WHERE \`order\`.id = ?
-    `;
+    const query =  `SELECT store.store_name, \`order\`.pickup_time, menu.menu_name, menu.price,
+        \`order\`.payment, \`order\`.fee, menu.image
+    FROM \`order\`
+    INNER JOIN store ON \`order\`.store_id = store.store_id
+    INNER JOIN order_menu ON \`order\`.id = order_menu.id
+    INNER JOIN menu ON order_menu.menu_id = menu.id
+    WHERE \`order\`.id = ?`
+    ;
     const [rows, fields] = await pool.execute(query, [id]);
     return rows;
 };
+
 
 //주문삭제
 
