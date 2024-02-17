@@ -14,6 +14,7 @@ import bookmarkRouter from './src/routes/bookmark.route.js'
 >>>>>>> fa98299ecb1b32d0e50fbb6c597a1bb2ff2c648a
 import dotenv from "dotenv";
 import cors from "cors";
+import userRouter from "./src/routes/user.route.js";
 
 dotenv.config()
 
@@ -49,6 +50,9 @@ app.get('/hello', (req, res) => {
     res.send('패킷 랜딩 페이지');
 });
 
+
+// 로그인
+app.use('/auth', userRouter);
 
 // 가게 정보
 //app.use('/order', storeRouter);
