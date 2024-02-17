@@ -1,5 +1,5 @@
 paths:
-  /order/map/:
+  /order/{store_id}/info:
     get:
       tags:
         - Store
@@ -7,14 +7,15 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: store_id
-          in: path
+        - in: path
+          name: store_id
           type: integer
           example: 1
           required: true
           description: 가게 ID
+      responses:
         200:
-          description: 메뉴 정보 조회에 성공하였습니다.
+          description: 가게 정보 조회에 성공하였습니다.
           schema:
             type: object
             properties:
