@@ -72,7 +72,7 @@ paths:
                       type: string
                     price:
                       type: integer
-                   containter:
+                    containter:
                       type: string
         500:
           description: 가게 조회에 실패하였습니다.
@@ -278,17 +278,17 @@ paths:
                   properties:
                     store_id:
                       type: integer
-                    store_name:
-                      type: string
-                    status:
-                      type: integer
-                    grade:
-                      type: number
-                    tel:
-                      type: string
-                    address:
-                      type: string
                     image:
+                      type: string
+                    category:
+                      type: integer
+                    id:
+                      type: integer
+                    menu_name:
+                      type: string
+                    price:
+                      type: integer
+                    containter:
                       type: string
         500:
           description: 가게 조회에 실패하였습니다.
@@ -316,28 +316,28 @@ paths:
                 items:
                   type: object
                   properties:
+                    id:
+                      type: integer
                     store_id:
                       type: integer
-                    store_name:
-                      type: string
-                    menu_id:
+                    menu_category:
                       type: integer
-                    menu_type:
-                      type: string
                     menu_name:
                       type: string
-                    menu_description:
+                    about_menu:
                       type: string
-                    price:
+                    price:         n:
                       type: integer
-                    size:
+                    containter:
                       type: integer
                     insulation:
                       type: integer
-                    liquid_sealed:
-                      type: boolean
-                    caution:
+                    liquid_seal:
+                      type: integer
+                    image:
                       type: string
+
+
         500:
           description: 메뉴 조회에 실패하였습니다.
   /order/bookmark/{store_id}/meal:
@@ -364,20 +364,20 @@ paths:
                 items:
                   type: object
                   properties:
-                    store_id:
+                    id:
                       type: integer
-                    type:
-                      type: string
-                    menu_id:
+                    store_id:
                       type: integer
                     menu_name:
                       type: string
                     price:
                       type: integer
-                    size:
+                    containter:
                       type: string
-                    image:
-                      type: string
+                    insulation:
+                      type: integer
+                    liquid_seal:
+                      type: integer
           500:
             description: 식사류 조회에 실패하였습니다.
 
@@ -405,20 +405,20 @@ paths:
                 items:
                   type: object
                   properties:
+                    id:
+                      type: integer 
                     store_id:
-                      type: integer
-                    type:
-                      type: string
-                    menu_id:
                       type: integer
                     menu_name:
                       type: string
                     price:
                       type: integer
-                    size:
+                    containter:
                       type: string
-                    image:
-                      type: string
+                    insulation:
+                      type: integer
+                    liquid_seal:
+                      type: integer
         500:
           description: 사이드메뉴 조회에 실패하였습니다.
 
