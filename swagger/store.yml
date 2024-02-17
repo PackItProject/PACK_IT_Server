@@ -78,7 +78,7 @@ paths:
           description: 가게 조회에 실패하였습니다.
 
 
-  /order/{store_id}/{menu_id}:
+  /order/{store_id}/menu/{menu_id}:
     get:
       tags:
         - Store

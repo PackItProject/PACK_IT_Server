@@ -3,7 +3,6 @@ import {tempRouter} from "./src/routes/temp.route.js";
 import { specs } from './config/swagger.config.js';
 import SwaggerUi from 'swagger-ui-express';
 import cartRouter from "./src/routes/cart.route.js";
-import { orderRouter } from "./src/routes/order.route.js";
 import storeRouter from './src/routes/store.route.js';
 import bookmarkRouter from './src/routes/bookmark.route.js';
 import dotenv from "dotenv";

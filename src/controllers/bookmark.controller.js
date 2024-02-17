@@ -56,7 +56,9 @@ export const getBookmarkedMenuIdController=async(req,res,next)=>{
     const {storeId, menuId, pk_user}=req.params;
 
     if(!storeId){
-        console.log('잘못된 storeId입니다. ')
+        console.log('잘못된 storeId입니다. ');
+        return res.status(400).json({ error : "잘못된 가게 정보입니다" });
+
     }
     try{
         const menu=await getBookmarkedByMenuId(storeId,menuId,pk_user);
@@ -72,7 +74,9 @@ export const getBookmarkedMenuIdController=async(req,res,next)=>{
 export const showBookmarkedMealController=async(req,res,next)=>{
     const {storeId, pk_user}=req.params;
     if(!storeId){
-        console.log('잘못된 storeId입니다.')
+        console.log('잘못된 storeId입니다.');
+        return res.status(400).json({ error : "잘못된 가게 정보입니다" });
+
     }
     try{
         const meal=await getBookmarkedMeal(storeId,pk_user);
@@ -88,7 +92,9 @@ export const showBookmarkedMealController=async(req,res,next)=>{
 export const showBookmarkedSideController=async(req,res,next)=>{
     const {storeId,pk_user}=req.params;
     if(!storeId){
-        console.log('잘못된 storeId입니다.')
+        console.log('잘못된 storeId입니다.');
+        return res.status(400).json({ error : "잘못된 가게 정보입니다" });
+
     }
     try{
         const side=await getBookmarkedSide(storeId,pk_user);

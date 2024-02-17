@@ -39,10 +39,11 @@ export const getByStoreIdController = async (req, res, next) => {
 
 //menuId로 메뉴 조회
 export const getMenuController=async(req,res,next)=>{
-    const {storeId, menuId}=req.params;
+    const {storeId, menuId}=req.body;
 
-    if(!storeId){
-        console.log('잘못된 storeId입니다. ')
+    if(!storeId||!menuId){
+        console.log('잘못된 storeId입니다. ');
+        return res.status(400).json({ error : "잘못된 가게 정보입니다" });
     }
     try{
         const menu=await getByMenuId(storeId,menuId);
@@ -58,11 +59,17 @@ export const getMenuController=async(req,res,next)=>{
 export const showMealController=async(req,res,next)=>{
     const {storeId}=req.params;
     if(!storeId){
-        console.log('잘못된 storeId입니다.')
+        console.log('잘못된 storeId입니다.');
+        return res.status(400).json({ error : "잘못된 가게 정보입니다" });
     }
     try{
         const meal=await getMeal(storeId);
+        if (!meal || meal.length === 0) {
+            console.log('해당 가게에 대한 음식이 없습니다.');
+            return res.status(404).json({ error: "해당 가게에 대한 음식이 없습니다." });
+        }
         res.json(meal);
+        next();
     }
     catch(error){
         console.error('Error finding meal',error);
@@ -74,7 +81,8 @@ export const showMealController=async(req,res,next)=>{
 export const showSideController=async(req,res,next)=>{
     const {storeId}=req.params;
     if(!storeId){
-        console.log('잘못된 storeId입니다.')
+        console.log('잘못된 storeId입니다.');
+        return res.status(400).json({ error : "잘못된 가게 정보입니다" });
     }
     try{
         const side=await getSide(storeId);
@@ -106,6 +114,24 @@ export const searchByStoreNameController=async(req,res,next)=>{
 //         console.error("Failed to load nearby restaurants:", error);
 //     }
 // }
+
+export const storeInfo = async (req, res, next) => {
+    const { store_id } = req.params;
+    console.log("store id is ", store_id);
+
+    if (!store_id) {
+        return res.status(400).json({ error : "잘못된 가게 정보입니다" });
+    }
+
+    try {
+        const aboutStore = await getStoreInfo(store_id);
+        res.json(aboutStore);
+        next();
+    } catch(error) {
+        console.error(error);
+        next (error);
+    }
+};
 export const storeGrade = async (req, res, next) => {
     const { store_id } = req.params;
     console.log("store id is ", store_id);
