@@ -74,7 +74,7 @@ paths:
   /order/bookmark/{pk_user}/{store_id}:
     get:
       tags:
-        - Store
+        - Bookmark
       summary: storeId로 가게 조회
       produces:
         - application/json
@@ -123,7 +123,7 @@ paths:
   /order/bookmark/{pk_user}/{store_id}/menu/{menu_id}:
     get:
       tags:
-        - Store
+        - Bookmark
       summary: menuId로 가게 조회
       produces:
         - application/json
@@ -184,7 +184,7 @@ paths:
   /order/bookmark/{pk_user}/{store_id}/meal:
     get:
       tags:
-        - Store
+        - Bookmark
       summary: storeId로 식사류 조회
       produces:
         - application/json
@@ -238,7 +238,7 @@ paths:
   /order/bookmark/{pk_user}/{store_id}/side:
     get:
       tags:
-        - Store
+        - Bookmark
       summary: storeId로 사이드메뉴 조회
       produces:
         - application/json
