@@ -78,7 +78,7 @@ paths:
           description: 가게 조회에 실패하였습니다.
 
 
-  /order/{store_id}/menu/{menu_id}:
+  /order/near/{store_id}/menu/{menu_id}:
     get:
       tags:
         - Store
@@ -97,7 +97,7 @@ paths:
           schema:
             type: integer
           required: true
-          description: 가게 ID
+          description: 메뉴 ID
       responses:
         200:
           description: 메뉴 조회에 성공하였습니다.
