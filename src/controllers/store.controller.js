@@ -45,9 +45,21 @@ export const getMenuController = async(req, res, next)=>{
             console.log('잘못된 storeId입니다. ');
             return res.status(400).json({ error : "잘못된 가게 정보입니다" });
         }
+        if(!menu_id){
+            console.log('잘못된 storeId입니다. ');
+            return res.status(400).json({ error : "잘못된 가게 정보입니다" });
+        }
 
         const menu=await getByMenuId(store_id,menu_id);
+
+
+        if(!menu || menu.length===0){
+            console.log('북마크된 가게의 메뉴가 없습니다.');
+            return res.status(404).json({ error : "북마크된 가게의 메뉴가 없습니다." });
+        }
+
         res.json(menu);
+        next();
 
     }catch(error){
         console.error(error);

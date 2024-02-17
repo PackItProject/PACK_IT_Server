@@ -38,9 +38,9 @@ export const getByStoreId = async (store_id) => {
 };
 
 //menuId로 메뉴 조회
-export const getByMenuId=async(storeId, menuId)=>{
+export const getByMenuId=async(store_id, menu_id)=>{
     const query='SELECT menu.* FROM menu WHERE store_id=? AND id=? ';
-    const params=[storeId, menuId];
+    const params=[store_id, menu_id];
 
     const [rows]=await pool.execute(query, params);
 
