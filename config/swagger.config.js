@@ -9,9 +9,9 @@ const options = {
             version: '1.0.0',
             description: 'Packit API 입니다'
         },
-        host: 'localhost:3000',
+        host: 'port-0-pack-it-ghdys32bls1g7ot3.sel5.cloudtype.app',
         basepath: '../',
-        schemes: ['http'],
+        schemes: ['https'],
     },
     apis: ['./src/routes/*.js', './swagger/*']
 };
