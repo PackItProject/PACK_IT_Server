@@ -71,7 +71,7 @@ paths:
         500:
           description: 서버 에러
 
-  /order/bookmark/{pk_user}/{store_id}:
+  /bookmark/{pk_user}/{store_id}:
     get:
       tags:
         - Bookmark
@@ -120,7 +120,7 @@ paths:
         500:
           description: 가게 조회에 실패하였습니다.
 
-  /order/bookmark/{pk_user}/{store_id}/menu/{menu_id}:
+  /bookmark/{pk_user}/{store_id}/menu/{menu_id}:
     get:
       tags:
         - Bookmark
@@ -181,7 +181,7 @@ paths:
         500:
           description: 메뉴 조회에 실패하였습니다.
 
-  /order/bookmark/{pk_user}/{store_id}/meal:
+  /bookmark/{pk_user}/{store_id}/meal:
     get:
       tags:
         - Bookmark
@@ -235,7 +235,7 @@ paths:
             description: 식사류 조회에 실패하였습니다.
 
 
-  /order/bookmark/{pk_user}/{store_id}/side:
+  /bookmark/{pk_user}/{store_id}/side:
     get:
       tags:
         - Bookmark

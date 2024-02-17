@@ -1,5 +1,5 @@
 paths:
-  /order/map/near:
+  /order/near:
     get:
       tags:
         - Store
@@ -36,7 +36,7 @@ paths:
 
 
 
-  /order/map/near/{store_id}:
+  /order/near/{store_id}:
     get:
       tags:
         - Store
@@ -78,7 +78,7 @@ paths:
           description: 가게 조회에 실패하였습니다.
 
 
-  /order/map/{store_id}/{menu_id}:
+  /order/{store_id}/{menu_id}:
     get:
       tags:
         - Store
@@ -131,7 +131,7 @@ paths:
         500:
           description: 메뉴 조회에 실패하였습니다.
 
-  /order/map/near/{store_id}/meal:
+  /order/near/{store_id}/meal:
     get:
       tags:
        - Store
@@ -177,7 +177,7 @@ paths:
             description: 식사류 조회에 실패하였습니다.
 
 
-  /order/map/near/{store_id}/side:
+  /order/near/{store_id}/side:
     get:
       tags:
         - Store
@@ -217,7 +217,7 @@ paths:
                        type: integer
         500:
           description: 사이드메뉴 조회에 실패하였습니다.
-  /order/map/search/{store_name}:
+  /order/search/{store_name}:
     get:
       tags:
         - Store
