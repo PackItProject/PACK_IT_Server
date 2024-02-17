@@ -3,15 +3,9 @@ import {tempRouter} from "./src/routes/temp.route.js";
 import { specs } from './config/swagger.config.js';
 import SwaggerUi from 'swagger-ui-express';
 import cartRouter from "./src/routes/cart.route.js";
-<<<<<<< HEAD
 import { orderRouter } from "./src/routes/order.route.js";
-//import storeRouter from './src/routes/store.route.js';
-import bookmarkRouter from './src/routes/bookmark.route.js'
-//>>>>>>> a645609c6741be19de5cf9797a0d3e1989e02179
-=======
 import storeRouter from './src/routes/store.route.js';
 import bookmarkRouter from './src/routes/bookmark.route.js'
->>>>>>> fa98299ecb1b32d0e50fbb6c597a1bb2ff2c648a
 import dotenv from "dotenv";
 import cors from "cors";
 import userRouter from "./src/routes/user.route.js";
