@@ -92,6 +92,12 @@ paths:
             type: integer
           required: true
           description: 가게 ID
+        - in: path
+          name: menu_id
+          schema:
+            type: integer
+          required: true
+          description: 가게 ID
       responses:
         200:
           description: 메뉴 조회에 성공하였습니다.
