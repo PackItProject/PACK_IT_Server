@@ -1,7 +1,5 @@
 import { pool } from '../../config/db.config.js';
 
-
-}
 export const getStoreInfo = async (store_id) => {
     const query = ' SELECT s.store_name, s.tel, s.address, s.boss, s.license, s.hours, s.introduction, s.notice FROM store s WHERE store_id = ?';
     const params = [store_id];
@@ -25,7 +23,7 @@ export const getStoreList=async() =>{
     const [rows]=await pool.execute(query);
 
     return rows;
-}
+};
 export const getByStoreId = async (store_id) => {
     const query=`
         SELECT store.store_id, store.image, menu.category,menu.id, menu.menu_name, menu.image,menu.price, menu.containter 
