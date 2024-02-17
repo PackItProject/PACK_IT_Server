@@ -2,12 +2,15 @@ import {pool} from "../../config/db.config.js";
 
 export const getBookmarkedStoreService = async (pk_user) => {
     const query = `
-        SELECT store.store_id,store.store_name, store.status, AVG(G.grade) as average_grade, store.address
+        SELECT store.store_id, store.store_name, store.status, AVG(G.grade) as average_grade,
+               store.address, store.image,
+               CASE WHEN B.store_id IS NOT NULL THEN 1 ELSE 0 END AS is_bookmarked
         FROM store
-        INNER JOIN PackIt.Grade G on store.store_id = G.store_id
-        INNER JOIN PackIt.Bookmark B on store.store_id = B.store_id
-        WHERE B.pk_user=?
-        GROUP BY store.store_id, store.store_name, store.status, store.address
+                 LEFT JOIN PackIt.Grade G on store.store_id = G.store_id
+                 INNER JOIN PackIt.Bookmark B on store.store_id = B.store_id AND B.pk_user=?
+        GROUP BY store.store_id, store.store_name, store.status, store.address, is_bookmarked
+        HAVING is_bookmarked = 1
+
 
     `;
 

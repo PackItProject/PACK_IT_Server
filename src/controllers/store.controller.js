@@ -1,4 +1,9 @@
 import { status } from '../../config/response.status.js';
+<<<<<<< HEAD
+=======
+import { getStoreInfo } from '../services/store.service.js';
+import { getStoreGrade } from '../services/store.service.js';
+>>>>>>> fa98299ecb1b32d0e50fbb6c597a1bb2ff2c648a
 import { response } from '../../config/response.js';
 import{ getStoreList} from "../services/store.service.js";
 import{ getByStoreId} from "../services/store.service.js";
@@ -35,6 +40,7 @@ export const getByStoreIdController = async (req, res, next) => {
     }
 };
 
+<<<<<<< HEAD
 //menuId로 메뉴 조회
 export const getMenuController=async(req,res,next)=>{
     const {storeId, menuId}=req.params;
@@ -104,3 +110,22 @@ export const searchByStoreNameController=async(req,res,next)=>{
 //         console.error("Failed to load nearby restaurants:", error);
 //     }
 // }
+=======
+export const storeGrade = async (req, res, next) => {
+    const { store_id } = req.params;
+    console.log("store id is ", store_id);
+
+    if (!store_id) {
+        return res.status(400).json({ error : "잘못된 가게 정보입니다" });
+    }
+
+    try {
+        const aboutStore = await getStoreGrade(store_id);
+        res.json(aboutStore);
+        next();
+    } catch(error) {
+        console.error(error);
+        next (error);
+    }
+};
+>>>>>>> fa98299ecb1b32d0e50fbb6c597a1bb2ff2c648a
