@@ -96,11 +96,11 @@ export const searchByStoreNameController=async(req,res,next)=>{
     }
 };
 
-export const getNearbyRestaurantListController=async(req,res,next)=>{
-    try {
-       await loadNearbyRestaurantsWithLoader();
-        console.log("Nearby restaurants loaded successfully!");
-    }catch(error) {
-        console.error("Failed to load nearby restaurants:", error);
-    }
-}
+// export const getNearbyRestaurantListController=async(req,res,next)=>{
+//     try {
+//        await loadNearbyRestaurantsWithLoader();
+//         console.log("Nearby restaurants loaded successfully!");
+//     }catch(error) {
+//         console.error("Failed to load nearby restaurants:", error);
+//     }
+// }

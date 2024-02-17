@@ -2,14 +2,18 @@ import { pool } from '../../config/db.config.js';
 
 export const getStoreList=async() =>{
 
-    const query='SELECT * FROM store';
+    const query=`
+        SELECT store.store_id, store.store_name,store.status, store.grade, store.address, store.image, Bookmark.*
+        FROM store
+        LEFT JOIN Bookmark on store.store_id=bookmark,store_id;
+        `;
     const [rows]=await pool.execute(query);
 
     return rows;
 }
 export const getByStoreId = async (store_id) => {
     const query=`
-        SELECT store.store_id, store.image, menu.type,menu.menu_id, menu.menu_name, menu.menu_image,menu.price, menu.size 
+        SELECT store.store_id, store.image, menu.category,menu.id, menu.menu_name, menu.image,menu.price, menu.containter 
     FROM store 
     INNER JOIN menu on store.store_id=menu.store_id
     WHERE store.store_id=?
@@ -30,7 +34,10 @@ export const getByMenuId=async(storeId, menuId)=>{
 }
 
 export const getMeal=async(storeId)=>{
-    const query='SELECT menu.* FROM menu WHERE store_id=? AND menu_type="meal"';
+    const query=`
+        SELECT menu.id, menu.store_id, menu.menu_name, menu.price, menu.containter, menu.insulation, menu.liquid_seal, menu.about_menu, menu.image
+        FROM menu 
+        WHERE store_id=? AND menu_category=1`;
     const param=[storeId];
     const [rows]=await pool.execute(query, param);
 
@@ -38,8 +45,10 @@ export const getMeal=async(storeId)=>{
 }
 
 export const getSide=async(storeId)=>{
-    const query='SELECT menu.* FROM menu WHERE store_id=? AND menu_type="side"';
-    const param=[storeId];
+    const query=`
+        SELECT menu.id, menu.store_id, menu.menu_name, menu.price, menu.containter, menu.insulation, menu.liquid_seal, menu.about_menu, menu.image
+        FROM menu 
+        WHERE store_id=? AND menu_category=0`;    const param=[storeId];
     const [rows]=await pool.execute(query, param);
 
     return rows;
