@@ -1,21 +1,14 @@
 paths:
-  /bookmark/{pk_user}:
+  /order/map/near:
     get:
       tags:
-        - Bookmark
-      summary: 북마크된 가게 조회
+        - Store
+      summary: 가게 목록
       produces:
         - application/json
-      parameters:
-        - in: path
-          name: pk_user
-          schema:
-            type: integer
-          required: true
-          description: 사용자 ID
       responses:
         200:
-          description: 북마크된 가게 조회에 성공하였습니다.
+          description: 가게 목록 조회에 성공하였습니다.
           content:
             application/json:
               schema:
@@ -33,64 +26,30 @@ paths:
                       type: number
                     address:
                       type: string
+                    image:
+                      type: string
+                    pk_user:
+                      type: integer
+
         500:
-          description: 북마크된 가게 조회에 실패하였습니다.
+          description: 가게 목록 조회에 실패하였습니다.
 
 
-  /bookmark/{store_id}/{pk_user}:
-    post:
-      tags:
-        - Bookmark
-      summary: 특정 사용자의 특정 가게에 대한 북마크 상태 변경
-      parameters:
-        - in: path
-          name: store_id
-          schema:
-            type: integer
-          required: true
-          description: 북마크 상태를 변경하려는 가게의 ID
-        - in: path
-          name: pk_user
-          schema:
-            type: integer
-          required: true
-          description: 북마크 상태를 변경하려는 사용자의 ID
-      responses:
-        200:
-          description: 북마크 상태가 성공적으로 변경되었습니다.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "북마크가 성공적으로 변경되었습니다."
-        400:
-          description: 유효하지 않은 요청입니다.
-        500:
-          description: 서버 에러
 
-  /order/bookmark/{pk_user}/{store_id}:
+  /order/map/near/{store_id}:
     get:
       tags:
-        - Bookmark
+        - Store
       summary: storeId로 가게 조회
       produces:
         - application/json
       parameters:
         - in: path
-          name: pk_user
-          schema:
-            type: integer
-          required: true
-          description: 사용자의 ID
-        - in: path
           name: store_id
           schema:
             type: integer
           required: true
-          description: 북마크된 가게 ID
+          description: 가게 ID
       responses:
         200:
           description: 가게 조회에 성공하였습니다.
@@ -115,25 +74,18 @@ paths:
                       type: integer
                     containter:
                       type: string
-                    pk_user:
-                      type: integer
         500:
           description: 가게 조회에 실패하였습니다.
 
-  /order/bookmark/{pk_user}/{store_id}/menu/{menu_id}:
+
+  /order/map/{store_id}/{menu_id}:
     get:
       tags:
-        - Bookmark
+        - Store
       summary: menuId로 가게 조회
       produces:
         - application/json
       parameters:
-        - in: path
-          name: pk_user
-          schema:
-            type: integer
-          required: true
-          description: 사용자의 ID
         - in: path
           name: store_id
           schema:
@@ -176,29 +128,21 @@ paths:
                       type: integer
                     image:
                       type: string
-                    pk_user:
-                      type: integer
         500:
           description: 메뉴 조회에 실패하였습니다.
 
-  /order/bookmark/{pk_user}/{store_id}/meal:
+  /order/map/near/{store_id}/meal:
     get:
       tags:
-        - Bookmark
+       - Store
       summary: storeId로 식사류 조회
       produces:
-        - application/json
+          - application/json
       parameters:
-        - in: path
-          name: pk_user
-          schema:
-            type: integer
-          required: true
-          description: 사용자의 ID
         - in: path
           name: store_id
           schema:
-            type: integer
+           type: integer
           required: true
           description: 가게 ID
       responses:
@@ -211,44 +155,36 @@ paths:
                 items:
                   type: object
                   properties:
-                    id:
-                      type: integer
-                    store_id:
-                      type: integer
-                    menu_name:
-                      type: string
-                    price:
-                      type: integer
-                    containter:
-                      type: string
-                    insulation:
-                      type: integer
-                    liquid_seal:
-                      type: integer
-                    about_menu:
-                      type: string
-                    image:
-                      type: string
-                    pk_user:
-                      type: integer
+                      id:
+                        type: integer
+                      store_id:
+                        type: integer
+                      menu_name:
+                        type: string
+                      price:
+                        type: integer
+                      containter:
+                        type: string
+                      insulation:
+                        type: integer
+                      liquid_seal:
+                        type: integer
+                      about_menu:
+                        type: string
+                      image:
+                        type: string
           500:
             description: 식사류 조회에 실패하였습니다.
 
 
-  /order/bookmark/{pk_user}/{store_id}/side:
+  /order/map/near/{store_id}/side:
     get:
       tags:
-        - Bookmark
+        - Store
       summary: storeId로 사이드메뉴 조회
       produces:
         - application/json
       parameters:
-        - in: path
-          name: pk_user
-          schema:
-            type: integer
-          required: true
-          description: 사용자의 ID
         - in: path
           name: store_id
           schema:
@@ -265,21 +201,59 @@ paths:
                 items:
                   type: object
                   properties:
-                    id:
-                      type: integer
-                    store_id:
-                      type: integer
-                    menu_name:
-                      type: string
-                    price:
-                      type: integer
-                    containter:
-                      type: string
-                    insulation:
-                      type: integer
-                    liquid_seal:
-                      type: integer
-                    pk_user:
-                      type: integer
+                     id:
+                       type: integer
+                     store_id:
+                       type: integer
+                     menu_name:
+                       type: string
+                     price:
+                       type: integer
+                     containter:
+                       type: string
+                     insulation:
+                       type: integer
+                     liquid_seal:
+                       type: integer
         500:
           description: 사이드메뉴 조회에 실패하였습니다.
+  /order/map/search/{store_name}:
+    get:
+      tags:
+        - Store
+      summary: store_name으로 가게 조회
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: store_name
+          schema:
+            type: string
+          required: true
+          description: 가게 이름
+      responses:
+        200:
+          description: 가게명으로 가게 찾기에 성공하였습니다.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                     id:
+                       type: integer
+                     store_id:
+                       type: integer
+                     menu_category:
+                       type: integer
+                     menu_name:
+                       type: string
+                     about_menu:
+                       type: string
+                     price:
+                       type: integer
+                     containter:
+                       type: integer
+        500:
+          description: 가게명 조회에 실패하였습니다.
