@@ -38,58 +38,63 @@ export const getByStoreIdController = async (req, res, next) => {
 };
 
 //menuId로 메뉴 조회
-export const getMenuController=async(req,res,next)=>{
-    const {storeId, menuId}=req.body;
+export const getMenuController = async(req, res, next)=>{
+    try {
+        const { store_id, menu_id } = req.params;
 
-    if(!storeId||!menuId){
-        console.log('잘못된 storeId입니다. ');
-        return res.status(400).json({ error : "잘못된 가게 정보입니다" });
-    }
-    try{
-        const menu=await getByMenuId(storeId,menuId);
+        if(!store_id){
+            console.log('잘못된 storeId입니다. ');
+            return res.status(400).json({ error : "잘못된 가게 정보입니다" });
+        }
+
+        const menu=await getByMenuId(store_id,menu_id);
         res.json(menu);
-    }
-    catch(error){
-        console.error('Error finding menu',error);
-        next(error);
+
+    }catch(error){
+        console.error(error);
     }
 };
 
 //meal 조회
-export const showMealController=async(req,res,next)=>{
-    const {storeId}=req.params;
-    if(!storeId){
-        console.log('잘못된 storeId입니다.');
-        return res.status(400).json({ error : "잘못된 가게 정보입니다" });
-    }
-    try{
-        const meal=await getMeal(storeId);
+export const showMealController = async(req,res,next)=>{
+    try {
+        const { store_id } = req.params;
+
+        if (!store_id) {
+            console.log('잘못된 storeId입니다.');
+            return res.status(400).json({error: "잘못된 가게 정보입니다"});
+        }
+        const meal=await getMeal(store_id);
         if (!meal || meal.length === 0) {
             console.log('해당 가게에 대한 음식이 없습니다.');
-            return res.status(404).json({ error: "해당 가게에 대한 음식이 없습니다." });
+            return res.status(404).json({ error: "해당 가게에 대한 식사류가 없습니다." });
         }
         res.json(meal);
         next();
-    }
-    catch(error){
-        console.error('Error finding meal',error);
-        next(error);
+    }catch(error){
+        console.error(error);
     }
 };
 
 //side 조회
 export const showSideController=async(req,res,next)=>{
-    const {storeId}=req.params;
-    if(!storeId){
-        console.log('잘못된 storeId입니다.');
-        return res.status(400).json({ error : "잘못된 가게 정보입니다" });
-    }
-    try{
-        const side=await getSide(storeId);
+    try {
+        const {store_id} = req.params;
+
+         if (!store_id) {
+             console.log('잘못된 storeId입니다.'+ store_id);
+             return res.status(400).json({error: "잘못된 가게 정보입니다"});
+         }
+        const side = await getSide(store_id);
+         if(!side || side.length===0){
+             console.log('해당 가게에는 사이드메뉴가 없습니다.');
+             return res.status(404).json({ error: "해당 가게에 대한 사이드메뉴가 없습니다." });
+         }
         res.json(side);
+         next();
     }
     catch(error){
-        console.error('Error finding side',error);
+        console.error(error);
         next(error);
     }
 };

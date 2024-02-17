@@ -47,15 +47,12 @@ export const getByMenuId=async(storeId, menuId)=>{
     return rows;
 };
 
-export const getMeal=async(storeId)=>{
-    if (!storeId) {
-        throw new Error("storeId가 올바르지 않습니다.");
-    }
+export const getMeal=async(store_id)=>{
     const query=`
         SELECT menu.id, menu.store_id, menu.menu_name, menu.price, menu.containter, menu.insulation, menu.liquid_seal, menu.about_menu, menu.image
         FROM menu 
         WHERE store_id=? AND menu_category=1`;
-    const params=[storeId];
+    const params=[store_id];
 
     try {
         const [rows] = await pool.execute(query, params);

@@ -100,7 +100,7 @@ export const getBookmarkedMeal=async(storeId, pk_user)=>{
         FROM menu 
         INNER JOIN Bookmark on menu.store_id=Bookmark.store_id
         WHERE menu.store_id=? AND menu.menu_category=1 AND Bookmark.pk_user=?`;
-    const param=[storeId];
+    const param=[storeId, pk_user];
     const [rows]=await pool.execute(query, param);
 
     return rows;
