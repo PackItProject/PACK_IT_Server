@@ -45,7 +45,6 @@ app.get('/hello', (req, res) => {
 
 
 // 로그인
-console.log("카카오 로그인 테스트 0");
 app.use('/auth', userRouter);
 
 // 가게 정보
