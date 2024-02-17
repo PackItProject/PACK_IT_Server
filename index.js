@@ -4,7 +4,7 @@ import { specs } from './config/swagger.config.js';
 import SwaggerUi from 'swagger-ui-express';
 import cartRouter from "./src/routes/cart.route.js";
 import storeRouter from './src/routes/store.route.js';
-import bookmarkRouter from './src/routes/bookmark.route.js'
+import bookmarkRouter from './src/routes/bookmark.route.js';
 import dotenv from "dotenv";
 import cors from "cors";
 import userRouter from "./src/routes/user.route.js";
