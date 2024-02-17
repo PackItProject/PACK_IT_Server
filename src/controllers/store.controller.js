@@ -8,7 +8,6 @@ import {getByMenuId} from "../services/store.service.js";
 import {getMeal} from "../services/store.service.js";
 import {getSide} from "../services/store.service.js";
 import {searchByStoreName} from "../services/store.service.js";
-import { loadNearbyRestaurantsWithLoader } from '../services/map.service.js';
 
 export const getStoreListController=async(req,res,next)=>{
     try{
@@ -111,14 +110,7 @@ export const searchByStoreNameController=async(req,res,next)=>{
     }
 };
 
-// export const getNearbyRestaurantListController=async(req,res,next)=>{
-//     try {
-//        await loadNearbyRestaurantsWithLoader();
-//         console.log("Nearby restaurants loaded successfully!");
-//     }catch(error) {
-//         console.error("Failed to load nearby restaurants:", error);
-//     }
-// }
+
 
 export const storeInfo = async (req, res, next) => {
     const { store_id } = req.params;

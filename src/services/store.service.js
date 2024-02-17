@@ -75,7 +75,10 @@ export const getSide=async(storeId)=>{
 };
 
 export const searchByStoreName=async(storeName)=>{
-    const query='SELECT menu.* FROM menu WHERE store_name=?';
+    const query='SELECT menu.*, store.store_name\n' +
+        'FROM menu\n' +
+        'INNER JOIN store ON store.store_id=menu.store_id\n' +
+        'WHERE store.store_name=\'초식곳간\';';
     const params=[storeName];
     const [rows]=await pool.execute(query, params);
 

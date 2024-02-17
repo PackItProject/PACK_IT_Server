@@ -16,6 +16,6 @@ storeRouter.get('/near/:store_id',getByStoreIdController);
 storeRouter.get('/near/:store_id/menu/:menu_id',getMenuController);
 storeRouter.get('/near/:store_id/meal',showMealController);
 storeRouter.get('/near/:store_id/side',showSideController);
-storeRouter.get('/search/:store_name', searchByStoreNameController);
+//storeRouter.get('/search/:store_name', searchByStoreNameController);
 
 export default storeRouter;
