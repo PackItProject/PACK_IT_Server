@@ -116,8 +116,8 @@ export const showBookmarkedMealController=async(req,res,next)=>{
 //side 조회
 export const showBookmarkedSideController=async(req,res,next)=>{
     try{
-        const {storeId,pk_user}=req.params;
-        if(!storeId){
+        const {store_id,pk_user}=req.params;
+        if(!store_id){
             console.log('잘못된 storeId입니다.');
             return res.status(400).json({ error : "잘못된 가게 정보입니다" });
         }
@@ -126,12 +126,13 @@ export const showBookmarkedSideController=async(req,res,next)=>{
             return res.status(400).json({ error : "잘못된 유저 정보입니다" });
         }
 
-        const side=await getBookmarkedSide(storeId,pk_user);
+        const side=await getBookmarkedSide(store_id,pk_user);
         if(!side || side.length===0){
             console.log('북마크된 가게의 사이드 메뉴가 없습니다.');
             return res.status(404).json({ error : "북마크된 가게의 사이드 메뉴가 없습니다." })
         }
         res.json(side);
+        next();
     }
     catch(error){
         console.error('Error finding side',error);
