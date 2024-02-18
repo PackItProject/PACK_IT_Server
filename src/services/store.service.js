@@ -16,9 +16,11 @@ export const getStoreGrade = async (store_id) => {
 };
 export const getStoreList=async() =>{
     const query=`
-        SELECT store.store_id, store.store_name,store.status, store.grade, store.address, store.image, Bookmark.*
+        SELECT store.store_id, store.store_name, store.status, store.grade, store.address, store.image,
+               Bookmark.pk_user,
+               CASE WHEN Bookmark.store_id IS NOT NULL THEN 1 ELSE 0 END AS is_bookmarked
         FROM store
-        LEFT JOIN Bookmark on store.store_id=Bookmark.store_id;
+                 LEFT JOIN Bookmark ON store.store_id = Bookmark.store_id
         `;
     const [rows]=await pool.execute(query);
 
@@ -75,10 +77,7 @@ export const getSide=async(storeId)=>{
 };
 
 export const searchByStoreName=async(storeName)=>{
-    const query='SELECT menu.*, store.store_name\n' +
-        'FROM menu\n' +
-        'INNER JOIN store ON store.store_id=menu.store_id\n' +
-        'WHERE store.store_name=\'초식곳간\';';
+    const query='SELECT menu.*, store.store_name FROM menu INNER JOIN store ON store.store_id=menu.store_id WHERE store.store_name=?;';
     const params=[storeName];
     const [rows]=await pool.execute(query, params);
 
