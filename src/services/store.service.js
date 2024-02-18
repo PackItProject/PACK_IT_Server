@@ -13,6 +13,7 @@ export const getStoreGrade = async (store_id) => {
     const params = [store_id];
     const rows = await pool.execute(query, params);
 
+    return rows[0];
 };
 export const getStoreList=async() =>{
     const query=`
