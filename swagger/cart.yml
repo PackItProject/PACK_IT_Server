@@ -53,12 +53,42 @@ paths:
       responses:
         200:
           description: 장바구니 조회에 성공하였습니다.
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/CartItem'
         500:
           description: 장바구니 조회에 실패하였습니다.
+    delete:
+      tags:
+        - Cart
+      summary: 장바구니에서 메뉴 삭제
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: item
+          description: 삭제할 메뉴 정보
+          schema:
+            type: object
+            required:
+              - pk_user
+              - store_id
+              - menu_id
+            properties:
+              pk_user:
+                type: integer
+                example: 1
+              store_id:
+                type: integer
+                example: 1
+              menu_id:
+                type: integer
+                example: 1
+      responses:
+        200:
+          description: 장바구니에서 아이템이 성공적으로 삭제되었습니다.
+        404:
+          description: 장바구니에 해당 아이템이 존재하지 않습니다.
+        500:
+          description: 장바구니에서 아이템을 삭제하는데 실패하였습니다.
+
   /cart/order:
     post:
       tags:
