@@ -1,0 +1,71 @@
+paths:
+  /auth/kakao/signin:
+    post:
+      tags:
+        - User
+      summary: 카카오 로그인
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          description: 로그인하는 사용자 정보
+          schema:
+            type: object
+            required:
+              - kakaoId
+              - email
+              - name
+              - profileImage
+            properties:
+              kakaoId:
+                type: integer
+                example: 1
+              email:
+                type: string
+                example: abc@umc.com
+              name:
+                type: string
+                example: 사용자명
+              profileImage:
+                type: string
+                example: 프로필 이미지 url
+      responses:
+        200:
+          description: 로그인 성공
+        500:
+          description: 로그인 실패
+  /order/{store_id}/grade:
+    get:
+      tags:
+        - Store
+      summary: 가게 리뷰란 조회
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: store_id
+          type: integer
+          example: 1
+          required: true
+          description: 가게 ID
+      responses:
+        200:
+          description: 가게 리뷰 조회에 성공하였습니다.
+          schema:
+            type: object
+            properties:
+              nickname:
+                type: string
+                example: "익명1"
+              grade:
+                type: float
+                example: 4.5
+              content:
+                type: string
+                example: "리뷰 내용"
+              image:
+                type: string
+                example: "리뷰 이미지 url"
+        500:
+          description: 가게 리뷰 조회를 실패하였습니다.
