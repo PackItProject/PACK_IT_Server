@@ -1,4 +1,4 @@
-import {addItem as addCartItem, getOrderListDetailService} from '../services/cart.service.js';
+import {addItem as addCartItem, deleteCartService, getOrderListDetailService} from '../services/cart.service.js';
 import {getCartItems} from "../services/cart.service.js";
 import {addOrderService} from "../services/cart.service.js";
 import { getOrderListsService } from '../services/cart.service.js';
@@ -92,3 +92,21 @@ export const deleteOrderController=async (req, res)=> {
     }
 }
 
+
+export const deleteCartController=async (req,res,next)=>{
+    const {pk_user, store_id, menu_id} = req.body;
+    try {
+        const result = await deleteCartService(pk_user,store_id,menu_id);
+        if (result.affectedRows > 0) {  // 쿼리가 성공적으로 실행되었다면,
+            res.json({
+                message: "장바구니에서 아이템을 성공적으로 삭제하였습니다."
+            });
+        } else {  // 쿼리가 실패하였다면,
+            res.status(500).json({
+                message: "실패"
+            });
+        }
+    } catch (error) {
+        next(error);
+    }
+};

@@ -109,16 +109,22 @@ export const getOrderListDetailService = async (id) => {
     const [rows, fields] = await pool.execute(query, [id]);
     return rows;
 };
-
-
 //주문삭제
 
-export const deleteOrderService = async (order_id) => {
+export const deleteOrderService=async (order_id)=>{
     const query1 = 'DELETE FROM `order_menu` WHERE `id` = ?';
     const query2 = 'DELETE FROM `order` WHERE `id` = ?';
 
     await pool.execute(query1, [order_id]);
     const [result] = await pool.execute(query2, [order_id]);
+
+    return result;
+};
+
+//장바구니 내에서 삭제
+export const deleteCartService = async (pk_user, store_id, menu_id) => {
+    const query1 = `DELETE FROM cart WHERE pk_user = ? AND store_id = ? AND menu_id = ?`;
+    const [result] = await pool.execute(query1, [pk_user, store_id, menu_id]);
 
     return result;
 };
